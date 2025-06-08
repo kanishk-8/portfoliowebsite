@@ -142,7 +142,7 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="px-2 pt-2 pb-6 space-y-2 bg-gray-800/95 backdrop-blur-xl rounded-xl mt-4 border border-gray-700">
