@@ -153,14 +153,12 @@ export default function Skills() {
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              "Redux",
-              "Zustand",
-              "Prisma",
+              "convex",
               "Firebase",
               "Vercel",
-              "Netlify",
-              "Jest",
-              "Cypress",
+              "Microsoft Azure",
+              "Render",
+              "Clerk",
             ].map((tech, index) => (
               <span
                 key={tech}

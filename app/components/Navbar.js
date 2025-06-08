@@ -79,7 +79,7 @@ export default function Navbar() {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative px-5 py-2.5 text-gray-300 hover:text-white rounded-xl text-sm font-medium transition-all duration-300 group overflow-hidden hover:scale-105 active:scale-95 hover:-translate-y-1 ${
+                className={`relative px-5 py-2.5 text-gray-300 hover:text-white rounded-xl text-sm font-bold transition-all duration-300 group overflow-hidden hover:scale-105 active:scale-95 hover:-translate-y-1 ${
                   mounted ? "animate-fade-in-up" : "opacity-0 translate-y-5"
                 }`}
                 style={{
@@ -99,14 +99,14 @@ export default function Navbar() {
             <a
               href="/resume.pdf"
               download="Kanishk_Kumar_Resume.pdf"
-              className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 border border-gray-700 hover:border-gray-600 flex items-center space-x-2 hover:scale-105 hover:-translate-y-1 active:scale-95"
+              className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 border border-gray-700 hover:border-gray-600 flex items-center space-x-2 hover:scale-105 hover:-translate-y-1 active:scale-95"
             >
               <span>📄</span>
               <span>Resume</span>
             </a>
             <button
               onClick={() => scrollToSection("#contact")}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-1 active:scale-95"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-2 rounded-full text-sm font-bold transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-1 active:scale-95"
             >
               Hire Me
             </button>
@@ -116,25 +116,26 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="relative w-10 h-10 rounded-lg bg-gray-800 border border-gray-700 hover:border-gray-600 flex items-center justify-center text-gray-400 hover:text-white focus:outline-none transition-all duration-200 active:scale-95"
+              className="relative w-12 h-12 rounded-xl bg-black/20 backdrop-blur-xl border border-gray-700/50 hover:border-blue-500/30 hover:bg-black/40 flex items-center justify-center text-gray-300 hover:text-white focus:outline-none transition-all duration-300 active:scale-95 hover:scale-105 hover:-translate-y-1 shadow-lg hover:shadow-xl"
             >
               <div className="w-5 h-5 flex flex-col justify-center space-y-1">
                 <span
-                  className={`w-full h-0.5 bg-current transform origin-center transition-all duration-200 ${
+                  className={`w-full h-0.5 bg-current transform origin-center transition-all duration-300 ${
                     isOpen ? "rotate-45 translate-y-1.5" : ""
                   }`}
                 />
                 <span
-                  className={`w-full h-0.5 bg-current transition-all duration-200 ${
+                  className={`w-full h-0.5 bg-current transition-all duration-300 ${
                     isOpen ? "opacity-0" : ""
                   }`}
                 />
                 <span
-                  className={`w-full h-0.5 bg-current transform origin-center transition-all duration-200 ${
+                  className={`w-full h-0.5 bg-current transform origin-center transition-all duration-300 ${
                     isOpen ? "-rotate-45 -translate-y-1.5" : ""
                   }`}
                 />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-xl opacity-0 hover:opacity-100 transition-all duration-300" />
             </button>
           </div>
         </div>
@@ -145,39 +146,48 @@ export default function Navbar() {
             isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-2 pt-2 pb-6 space-y-2 bg-gray-800/95 backdrop-blur-xl rounded-xl mt-4 border border-gray-700">
+          <div
+            className={`px-2 pt-2 pb-6 space-y-2 rounded-xl mt-4 border shadow-2xl transition-all duration-200 ${
+              isOpen
+                ? "bg-black/80 backdrop-blur-xl border-gray-700/50"
+                : "bg-black/60 backdrop-blur-md border-gray-700/30"
+            }`}
+          >
             {navItems.map((item, index) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-lg text-base font-medium transition-all duration-200 ${
+                className={`relative block w-full text-left px-5 py-3 text-gray-300 hover:text-white rounded-xl text-base font-medium transition-all duration-300 group overflow-hidden hover:scale-105 active:scale-95 hover:-translate-y-1 ${
                   isOpen ? "animate-fade-in-left" : ""
                 }`}
                 style={{
                   animationDelay: isOpen ? `${index * 50}ms` : "0ms",
                 }}
               >
-                {item.name}
+                <span className="relative z-10">{item.name}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <div className="absolute inset-0 border border-transparent group-hover:border-blue-500/30 rounded-xl transition-all duration-300" />
               </button>
             ))}
 
             {/* Mobile CTA */}
             <div
-              className={`pt-4 border-t border-gray-700 space-y-2 ${
+              className={`pt-4 border-t border-gray-700/50 space-y-3 ${
                 isOpen ? "animate-fade-in-up animation-delay-300" : ""
               }`}
             >
               <a
                 href="/resume.pdf"
                 download="Kanishk_Kumar_Resume.pdf"
-                className="w-full bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 flex items-center justify-center space-x-2 active:scale-95"
+                className="w-full bg-black/40 backdrop-blur-xl hover:bg-black/60 text-gray-300 hover:text-white px-5 py-3 rounded-xl text-base font-medium transition-all duration-300 border border-gray-700/50 hover:border-gray-600/50 flex items-center justify-center space-x-2 hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg hover:shadow-xl"
               >
                 <span>📄</span>
                 <span>Download Resume</span>
               </a>
               <button
                 onClick={() => scrollToSection("#contact")}
-                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 active:scale-95"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-5 py-3 rounded-xl text-base font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-1 active:scale-95"
               >
                 Hire Me
               </button>
