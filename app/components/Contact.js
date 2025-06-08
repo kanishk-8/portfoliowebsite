@@ -166,7 +166,7 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Social Links */}
+            {/* Available for work indicator */}
             <div
               className={`mt-8 transform transition-all duration-1000 delay-700 ${
                 isVisible
@@ -174,36 +174,9 @@ export default function Contact() {
                   : "opacity-0 translate-y-4"
               }`}
             >
-              <h4 className="text-lg font-medium text-white mb-4">Follow Me</h4>
-              <div className="flex space-x-4">
-                {[
-                  {
-                    name: "Twitter",
-                    icon: "🐦",
-                    link: "https://twitter.com/kanishk",
-                  },
-                  {
-                    name: "Instagram",
-                    icon: "📷",
-                    link: "https://instagram.com/kanishk._.2",
-                  },
-                ].map((social, index) => (
-                  <a
-                    key={social.name}
-                    href={social.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-xl hover:bg-gray-700 transition-all duration-300 border border-gray-700 hover:border-gray-600 transform hover:scale-110 active:scale-95 ${
-                      isVisible
-                        ? `animate-scale-in animation-delay-${
-                            800 + index * 100
-                          }`
-                        : "opacity-0 scale-0"
-                    }`}
-                  >
-                    {social.icon}
-                  </a>
-                ))}
+              <div className="flex items-center space-x-2 text-green-400">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-sm">Available for new opportunities</span>
               </div>
             </div>
           </div>

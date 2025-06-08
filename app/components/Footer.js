@@ -42,6 +42,16 @@ export default function Footer() {
       icon: "💼",
       href: "https://www.linkedin.com/in/kanishk-kumar-926426258",
     },
+    {
+      name: "Twitter",
+      icon: "🐦",
+      href: "https://twitter.com/kanishk",
+    },
+    {
+      name: "Instagram",
+      icon: "📷",
+      href: "https://instagram.com/kanishk._.2",
+    },
   ];
 
   const scrollToTop = () => {
