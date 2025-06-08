@@ -1,92 +1,111 @@
 "use client";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function Projects() {
+  const [filter, setFilter] = useState("featured");
+  const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [filter, setFilter] = useState("all");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: "-100px" }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
 
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "Weeblook - Manga Reader Platform",
       description:
-        "A full-stack e-commerce platform built with Next.js, MongoDB, and Stripe integration. Features include user authentication, product management, shopping cart, and payment processing.",
-      image: "/api/placeholder/400/300",
-      technologies: ["Next.js", "MongoDB", "Stripe", "Tailwind CSS"],
-      category: "fullstack",
-      github: "https://github.com/kanishk-8",
-      live: "https://ecommerce-demo.vercel.app",
+        "A modern manga reader platform with dynamic theming built on Next.js. Integrates with MangaDex API to provide seamless manga reading experience with responsive design and real-time data fetching.",
+      technologies: ["Next.js", "MangaDex API", "Tailwind CSS", "React"],
+      category: "frontend",
+      github: "https://github.com/kanishk-8/weeblook",
+      live: "https://weeblook.vercel.app/popularmanga",
+      image: "/weeblook.png", // Upload the Weeblook screenshot here
       featured: true,
     },
     {
       id: 2,
-      title: "Task Management App",
+      title: "ProCode - Online Coding Assessment Platform",
       description:
-        "A React Native mobile app for task management with real-time synchronization. Built with Expo, Firebase, and features drag-and-drop functionality.",
-      image: "/api/placeholder/400/300",
-      technologies: ["React Native", "Firebase", "Expo", "Redux"],
-      category: "mobile",
-      github: "https://github.com/kanishk-8",
-      live: "https://play.google.com/store",
+        "A comprehensive coding assessment platform designed for teachers and students. Features include blogs, admin management, virtual classrooms, proctored coding tests, and real-time status tracking.",
+      technologies: ["Next.js", "Node.js", "MongoDB", "Authentication"],
+      category: "fullstack",
+      github: "https://github.com/kanishk-8/procode",
+      live: "https://procode-alpha.vercel.app/",
+      image: "/procode.png", // Upload the ProCode screenshot here
       featured: true,
     },
     {
       id: 3,
-      title: "Weather Dashboard",
+      title: "Cloud Teacher - AI Teaching Platform",
       description:
-        "A responsive weather dashboard built with React.js and OpenWeatherMap API. Features include current weather, 5-day forecast, and location-based weather updates.",
-      image: "/api/placeholder/400/300",
-      technologies: ["React.js", "OpenWeather API", "Chart.js", "CSS3"],
-      category: "frontend",
-      github: "https://github.com/kanishk-8",
-      live: "https://weather-dashboard-demo.vercel.app",
+        "An innovative cloud-based teaching platform that handles PDF uploads and provides AI-generated notes, quizzes, and doubt-solving functionality. Built with Streamlit for seamless deployment.",
+      technologies: ["Streamlit", "Python", "AI/ML", "PDF Processing"],
+      category: "fullstack",
+      github: "https://github.com/kanishk-8/cloudteacher",
+      live: "https://cloudteacher-app.streamlit.app/",
+      image: "/cloudteacher.png", // Upload the Cloud Teacher screenshot here
       featured: false,
     },
     {
       id: 4,
-      title: "Blog API",
+      title: "RailMadad - AI Railway Complaint System",
       description:
-        "A RESTful API built with Golang and PostgreSQL for a blogging platform. Features include JWT authentication, CRUD operations, and role-based access control.",
-      image: "/api/placeholder/400/300",
-      technologies: ["Golang", "PostgreSQL", "JWT", "Docker"],
-      category: "backend",
-      github: "https://github.com/kanishk-8",
+        "An AI-powered railway complaint management system with full-stack architecture. Features intelligent complaint categorization, real-time tracking, and automated responses for efficient railway customer service.",
+      technologies: ["Next.js", "Flask", "AI/ML", "Python"],
+      category: "fullstack",
+      github: "https://github.com/kanishk-8/sih_railmadad",
       live: null,
-      featured: false,
-    },
-    {
-      id: 5,
-      title: "Portfolio Website",
-      description:
-        "A personal portfolio website built with Next.js and Framer Motion. Features smooth animations, responsive design, and optimized performance.",
-      image: "/api/placeholder/400/300",
-      technologies: ["Next.js", "Framer Motion", "Tailwind CSS", "Vercel"],
-      category: "frontend",
-      github: "https://github.com/kanishk-8",
-      live: "https://kanishk-portfolio.vercel.app",
+      image: "/railmadad.png",
       featured: true,
     },
     {
-      id: 6,
-      title: "Chat Application",
+      id: 5,
+      title: "EcoCircle - Environmental Social Network",
       description:
-        "Real-time chat application built with Flask and Socket.IO. Features include private messaging, group chats, and file sharing capabilities.",
-      image: "/api/placeholder/400/300",
-      technologies: ["Flask", "Socket.IO", "SQLite", "JavaScript"],
-      category: "fullstack",
-      github: "https://github.com/kanishk-8",
-      live: "https://chat-app-demo.herokuapp.com",
+        "An eco-friendly Android app connecting environmentally conscious people. Features achievement tracking, environmental contribution monitoring, and social networking for sustainability enthusiasts.",
+      technologies: ["React Native", "Android", "Firebase", "Social Media"],
+      category: "mobile",
+      github: "https://github.com/kanishk-8/Eco-circle",
+      live: null,
+      image: "/ecocircle.png",
+      featured: false,
+    },
+    {
+      id: 6,
+      title: "Noti - Cloud Notes App",
+      description:
+        "A feature-rich Android notes app with cloud syncing capabilities. Includes note-taking, todo management, Firebase authentication, and real-time synchronization across devices.",
+      technologies: ["React Native", "Expo", "Firebase", "Cloud Sync"],
+      category: "mobile",
+      github: "https://github.com/kanishk-8/Noti",
+      live: null,
+      image: "/noti.png",
       featured: false,
     },
   ];
 
   const filters = [
+    { name: "Featured", value: "featured" },
     { name: "All Projects", value: "all" },
     { name: "Frontend", value: "frontend" },
-    { name: "Backend", value: "backend" },
     { name: "Full Stack", value: "fullstack" },
     { name: "Mobile", value: "mobile" },
   ];
@@ -94,93 +113,110 @@ export default function Projects() {
   const filteredProjects =
     filter === "all"
       ? projects
+      : filter === "featured"
+      ? projects.filter((project) => project.featured)
       : projects.filter((project) => project.category === filter);
 
   return (
-    <section id="projects" className="py-20 bg-gray-800">
+    <section id="projects" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+        {/* Header */}
+        <div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-16"
+          className={`text-center mb-16 transform transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
             My{" "}
             <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto mb-6"></div>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             Here are some of the projects I've worked on, showcasing my skills
             across different technologies
           </p>
-        </motion.div>
+        </div>
 
         {/* Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+        <div
+          className={`flex flex-wrap justify-center gap-4 mb-12 transform transition-all duration-1000 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
-          {filters.map((filterItem) => (
-            <motion.button
+          {filters.map((filterItem, index) => (
+            <button
               key={filterItem.value}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={() => setFilter(filterItem.value)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-200 ${
+              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 ${
                 filter === filterItem.value
-                  ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
-                  : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"
+                  ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700 hover:border-gray-600"
+              } ${
+                isVisible
+                  ? `animate-fade-in-up animation-delay-${index * 100 + 300}`
+                  : "opacity-0"
               }`}
             >
               {filterItem.name}
-            </motion.button>
+            </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <motion.div
-              key={`${filter}-${project.id}`}
-              layout
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{
-                duration: 0.4,
-                delay: index * 0.05,
-                ease: "easeOut",
-                layout: { duration: 0.3 },
-              }}
-              whileHover={{ y: -5 }}
-              className={`bg-gray-900 rounded-xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-200 ${
-                project.featured ? "ring-2 ring-blue-500/20" : ""
+            <div
+              key={project.id}
+              className={`bg-black rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-500 shadow-lg hover:shadow-2xl group hover:-translate-y-2 transform ${
+                project.featured ? "ring-2 ring-blue-500/30" : ""
+              } ${
+                isVisible
+                  ? `animate-fade-in-up animation-delay-${index * 150 + 600}`
+                  : "opacity-0 translate-y-12"
               }`}
             >
+              {/* Featured Badge */}
               {project.featured && (
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-bold px-3 py-1 inline-block">
-                  FEATURED
+                <div className="absolute top-3 right-3 z-10">
+                  <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm border border-white/20 flex items-center space-x-1">
+                    <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span>FEATURED</span>
+                  </div>
                 </div>
               )}
 
-              <div className="relative overflow-hidden group">
-                <div className="w-full h-48 bg-gradient-to-br from-blue-500/20 to-purple-600/20 flex items-center justify-center">
-                  <div className="text-6xl opacity-20">🚀</div>
-                </div>
-                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              {/* Project Image/Icon */}
+              <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 h-56">
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-contain bg-gray-900 group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full">
+                    <div className="text-6xl opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+                      {project.category === "frontend" && "🎨"}
+                      {project.category === "backend" && "⚙️"}
+                      {project.category === "fullstack" && "🚀"}
+                      {project.category === "mobile" && "📱"}
+                    </div>
+                  </div>
+                )}
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                   <div className="flex space-x-4">
-                    <motion.a
+                    <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
+                      className="bg-gray-800/90 backdrop-blur-sm text-white p-3 rounded-full hover:bg-gray-700 transition-all duration-200 transform hover:scale-110 active:scale-95 border border-gray-600"
                     >
                       <svg
                         className="w-5 h-5"
@@ -193,15 +229,13 @@ export default function Projects() {
                           clipRule="evenodd"
                         />
                       </svg>
-                    </motion.a>
+                    </a>
                     {project.live && (
-                      <motion.a
+                      <a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors duration-200"
+                        className="bg-blue-600/90 backdrop-blur-sm text-white p-3 rounded-full hover:bg-blue-700 transition-all duration-200 transform hover:scale-110 active:scale-95 border border-blue-400"
                       >
                         <svg
                           className="w-5 h-5"
@@ -216,70 +250,48 @@ export default function Projects() {
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                           />
                         </svg>
-                      </motion.a>
+                      </a>
                     )}
                   </div>
                 </div>
               </div>
 
+              {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-100 mb-2">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                <p className="text-gray-400 text-sm mb-4 line-clamp-3 leading-relaxed">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full"
+                      className="bg-gray-800 text-gray-300 text-xs px-3 py-1 rounded-full border border-gray-700 hover:border-gray-600 transition-colors duration-200"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-
-                <div className="flex space-x-4">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium"
-                  >
-                    View Code
-                  </a>
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium"
-                    >
-                      Live Demo
-                    </a>
-                  )}
-                </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* View More Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-          className="text-center mt-12"
+        <div
+          className={`text-center mt-16 transform transition-all duration-1000 delay-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
-          <motion.a
+          <a
             href="https://github.com/kanishk-8"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-200"
+            className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1 active:scale-95"
           >
             <span>View More on GitHub</span>
             <svg
@@ -295,9 +307,72 @@ export default function Projects() {
                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
               />
             </svg>
-          </motion.a>
-        </motion.div>
+          </a>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        .animation-delay-100 {
+          animation-delay: 100ms;
+        }
+        .animation-delay-200 {
+          animation-delay: 200ms;
+        }
+        .animation-delay-300 {
+          animation-delay: 300ms;
+        }
+        .animation-delay-400 {
+          animation-delay: 400ms;
+        }
+        .animation-delay-500 {
+          animation-delay: 500ms;
+        }
+        .animation-delay-600 {
+          animation-delay: 600ms;
+        }
+        .animation-delay-750 {
+          animation-delay: 750ms;
+        }
+        .animation-delay-900 {
+          animation-delay: 900ms;
+        }
+        .animation-delay-1050 {
+          animation-delay: 1050ms;
+        }
+        .animation-delay-1200 {
+          animation-delay: 1200ms;
+        }
+        .animation-delay-1350 {
+          animation-delay: 1350ms;
+        }
+        .animation-delay-1500 {
+          animation-delay: 1500ms;
+        }
+
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
     </section>
   );
 }

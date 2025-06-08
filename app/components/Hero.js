@@ -1,147 +1,255 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black"
     >
-      {/* Background Animation */}
+      {/* Subtle Upward Moving Stars Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
+        <div className="absolute inset-0 bg-black"></div>
+
+        {/* Main upward floating stars */}
         {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-white rounded-full opacity-10"
+          <div
+            key={`star-${i}`}
+            className="absolute animate-float-up opacity-30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              bottom: `-20px`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${Math.random() * 8 + 12}s`,
+            }}
+          >
+            <div
+              className="w-0.5 bg-gradient-to-t from-transparent via-white to-transparent"
+              style={{
+                height: `${Math.random() * 15 + 8}px`,
+                transform: `rotate(${Math.random() * 10 - 5}deg)`,
+              }}
+            />
+          </div>
+        ))}
+
+        {/* Twinkling static stars */}
+        {[...Array(80)].map((_, i) => (
+          <div
+            key={`twinkle-${i}`}
+            className="absolute bg-white rounded-full animate-twinkle"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              width: `${Math.random() * 3 + 1}px`,
-              height: `${Math.random() * 3 + 1}px`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.1, 0.2, 0.1],
-            }}
-            transition={{
-              duration: Math.random() * 2 + 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 2,
+              width: `${Math.random() * 2 + 1}px`,
+              height: `${Math.random() * 2 + 1}px`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${Math.random() * 3 + 3}s`,
             }}
           />
+        ))}
+
+        {/* Larger glowing stars */}
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={`glow-${i}`}
+            className="absolute animate-pulse-slow"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+            }}
+          >
+            <div className="w-1 h-1 bg-blue-400 rounded-full shadow-lg shadow-blue-400/50" />
+          </div>
         ))}
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+        <div
+          className={`transform transition-all duration-1000 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
-          <motion.h1
-            className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          <h1
+            className={`text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white transform transition-all duration-1000 delay-200 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
           >
             Hi, I'm{" "}
             <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
               Kanishk
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.div
-            className="text-xl sm:text-2xl lg:text-3xl text-gray-300 mb-8 h-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          <div
+            className={`text-xl sm:text-2xl lg:text-3xl text-gray-300 mb-8 h-16 transform transition-all duration-1000 delay-400 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
           >
-            <TypeAnimation
-              sequence={[
-                "Full Stack Developer",
-                2000,
-                "React.js Developer",
-                2000,
-                "Next.js Expert",
-                2000,
-                "Mobile App Developer",
-                2000,
-                "Backend Developer",
-                2000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
-          </motion.div>
+            {mounted && (
+              <TypeAnimation
+                sequence={[
+                  "Full Stack Developer",
+                  2000,
+                  "React.js Developer",
+                  2000,
+                  "Next.js Expert",
+                  2000,
+                  "Mobile App Developer",
+                  2000,
+                  "Backend Developer",
+                  2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            )}
+          </div>
 
-          <motion.p
-            className="text-lg sm:text-xl text-gray-400 mb-10 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          <p
+            className={`text-lg sm:text-xl text-gray-400 mb-10 max-w-3xl mx-auto transform transition-all duration-1000 delay-600 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
           >
             Student & passionate developer specializing in React, Next.js, React
             Native, Golang, and Flask. I love creating beautiful, functional
             applications that solve real-world problems.
-          </motion.p>
+          </p>
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          <div
+            className={`flex flex-col sm:flex-row gap-4 justify-center items-center transform transition-all duration-1000 delay-800 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
           >
-            <motion.button
-              onClick={() =>
-                document
-                  .querySelector("#projects")
-                  .scrollIntoView({ behavior: "smooth" })
-              }
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-200 shadow-lg hover:shadow-xl"
+            <button
+              onClick={() => scrollToSection("#projects")}
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1 active:scale-95"
             >
               View My Work
-            </motion.button>
-            <motion.button
-              onClick={() =>
-                document
-                  .querySelector("#contact")
-                  .scrollIntoView({ behavior: "smooth" })
-              }
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="border-2 border-gray-400 hover:border-white text-gray-400 hover:text-white font-bold py-3 px-8 rounded-full transition-all duration-200"
+            </button>
+            <button
+              onClick={() => scrollToSection("#contact")}
+              className="border-2 border-gray-400 hover:border-white text-gray-400 hover:text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
             >
               Get In Touch
-            </motion.button>
-          </motion.div>
-        </motion.div>
+            </button>
+          </div>
+        </div>
 
         {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+        <div
+          className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1000 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="w-1 h-3 bg-gray-400 rounded-full mt-2"
-            />
-          </motion.div>
-        </motion.div>
+          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center animate-bounce-slow">
+            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-scroll-indicator" />
+          </div>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float-up {
+          0% {
+            transform: translateY(100vh) translateX(0);
+            opacity: 0;
+          }
+          10% {
+            opacity: 0.3;
+          }
+          90% {
+            opacity: 0.1;
+          }
+          100% {
+            transform: translateY(-20px) translateX(10px);
+            opacity: 0;
+          }
+        }
+
+        @keyframes twinkle {
+          0%,
+          100% {
+            opacity: 0.2;
+            transform: scale(0.8);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.2);
+          }
+        }
+
+        @keyframes pulse-slow {
+          0%,
+          100% {
+            opacity: 0.4;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.1);
+          }
+        }
+
+        @keyframes bounce-slow {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        @keyframes scroll-indicator {
+          0% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(16px);
+            opacity: 0;
+          }
+        }
+
+        .animate-float-up {
+          animation: float-up linear infinite;
+        }
+
+        .animate-twinkle {
+          animation: twinkle ease-in-out infinite;
+        }
+
+        .animate-pulse-slow {
+          animation: pulse-slow ease-in-out infinite;
+          animation-duration: 4s;
+        }
+
+        .animate-bounce-slow {
+          animation: bounce-slow ease-in-out infinite;
+          animation-duration: 2s;
+        }
+
+        .animate-scroll-indicator {
+          animation: scroll-indicator ease-in-out infinite;
+          animation-duration: 2s;
+        }
+      `}</style>
     </section>
   );
 }

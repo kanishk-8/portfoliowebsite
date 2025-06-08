@@ -1,8 +1,31 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 export default function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: "-50px" }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
 
   const quickLinks = [
     { name: "Home", href: "#home" },
@@ -14,7 +37,11 @@ export default function Footer() {
 
   const socialLinks = [
     { name: "GitHub", icon: "🐙", href: "https://github.com/kanishk-8" },
-    { name: "LinkedIn", icon: "💼", href: "https://linkedin.com/in/kanishk" },
+    {
+      name: "LinkedIn",
+      icon: "💼",
+      href: "https://www.linkedin.com/in/kanishk-kumar-926426258",
+    },
     { name: "Twitter", icon: "🐦", href: "https://twitter.com/kanishk" },
     { name: "Instagram", icon: "📷", href: "https://instagram.com/kanishk" },
   ];
@@ -31,16 +58,17 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-900 border-t border-gray-800 relative">
+    <footer ref={ref} className="bg-black border-t border-gray-800 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-50px" }}
+            <div
+              className={`transform transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
             >
               <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent mb-4">
                 Kanishk
@@ -52,51 +80,47 @@ export default function Footer() {
               </p>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
-                  <motion.a
+                  <a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: index * 0.1,
-                      ease: "easeOut",
-                    }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    viewport={{ once: true }}
-                    className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-lg hover:bg-gray-700 transition-all duration-200 border border-gray-700 hover:border-gray-600"
+                    className={`w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-lg hover:bg-gray-700 transition-all duration-200 border border-gray-700 hover:border-gray-600 transform hover:scale-110 active:scale-95 ${
+                      isVisible
+                        ? `animate-scale-in animation-delay-${
+                            200 + index * 100
+                          }`
+                        : "opacity-0 scale-0"
+                    }`}
                   >
                     {social.icon}
-                  </motion.a>
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-50px" }}
+            <div
+              className={`transform transition-all duration-1000 delay-200 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
             >
-              <h4 className="text-gray-100 font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-white font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 {quickLinks.map((link, index) => (
-                  <motion.li
+                  <li
                     key={link.name}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: 0.2 + index * 0.05,
-                      ease: "easeOut",
-                    }}
-                    viewport={{ once: true }}
+                    className={`transform transition-all duration-500 ${
+                      isVisible
+                        ? `animate-fade-in-left animation-delay-${
+                            300 + index * 50
+                          }`
+                        : "opacity-0 -translate-x-4"
+                    }`}
                   >
                     <button
                       onClick={() => scrollToSection(link.href)}
@@ -104,71 +128,85 @@ export default function Footer() {
                     >
                       {link.name}
                     </button>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           </div>
 
           {/* Contact Info */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-50px" }}
+            <div
+              className={`transform transition-all duration-1000 delay-300 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
             >
-              <h4 className="text-gray-100 font-semibold mb-4">Get in Touch</h4>
+              <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
               <div className="space-y-3">
-                <motion.div
-                  className="flex items-center space-x-2 text-sm"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 }}
-                  viewport={{ once: true }}
+                <div
+                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
+                    isVisible
+                      ? "animate-fade-in-left animation-delay-400"
+                      : "opacity-0 -translate-x-4"
+                  }`}
                 >
                   <span>📧</span>
                   <a
-                    href="mailto:kanishk@example.com"
+                    href="mailto:kanishkkumar222004@gmail.com"
                     className="text-gray-400 hover:text-white transition-colors duration-200"
                   >
-                    kanishk@example.com
+                    kanishkkumar222004@gmail.com
                   </a>
-                </motion.div>
-                <motion.div
-                  className="flex items-center space-x-2 text-sm"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.35 }}
-                  viewport={{ once: true }}
+                </div>
+                <div
+                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
+                    isVisible
+                      ? "animate-fade-in-left animation-delay-450"
+                      : "opacity-0 -translate-x-4"
+                  }`}
+                >
+                  <span>📱</span>
+                  <a
+                    href="tel:+919871808842"
+                    className="text-gray-400 hover:text-white transition-colors duration-200"
+                  >
+                    +91 9871808842
+                  </a>
+                </div>
+                <div
+                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
+                    isVisible
+                      ? "animate-fade-in-left animation-delay-500"
+                      : "opacity-0 -translate-x-4"
+                  }`}
                 >
                   <span>📍</span>
-                  <span className="text-gray-400">Your City, Country</span>
-                </motion.div>
-                <motion.div
-                  className="flex items-center space-x-2 text-sm"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                  viewport={{ once: true }}
+                  <span className="text-gray-400">Delhi, India</span>
+                </div>
+                <div
+                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
+                    isVisible
+                      ? "animate-fade-in-left animation-delay-550"
+                      : "opacity-0 -translate-x-4"
+                  }`}
                 >
                   <span>💼</span>
                   <span className="text-gray-400">
                     Available for opportunities
                   </span>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-50px" }}
-          className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center"
+        <div
+          className={`border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center transform transition-all duration-1000 delay-600 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
           <div className="text-gray-400 text-sm mb-4 md:mb-0">
             © {currentYear} Kanishk. All rights reserved. Built with ❤️ using
@@ -176,20 +214,16 @@ export default function Footer() {
           </div>
 
           {/* Back to Top Button */}
-          <motion.button
+          <button
             onClick={scrollToTop}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center space-x-2 text-gray-400 hover:text-white text-sm transition-all duration-200 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-full border border-gray-700 hover:border-gray-600"
+            className="flex items-center space-x-2 text-gray-400 hover:text-white text-sm transition-all duration-200 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-full border border-gray-700 hover:border-gray-600 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
           >
             <span>Back to Top</span>
-            <motion.svg
-              className="w-4 h-4"
+            <svg
+              className="w-4 h-4 transform hover:-translate-y-1 transition-transform duration-200"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              whileHover={{ y: -1 }}
-              transition={{ duration: 0.2 }}
             >
               <path
                 strokeLinecap="round"
@@ -197,20 +231,75 @@ export default function Footer() {
                 strokeWidth={2}
                 d="M5 10l7-7m0 0l7 7m-7-7v18"
               />
-            </motion.svg>
-          </motion.button>
-        </motion.div>
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Decorative Elements */}
-      <motion.div
-        className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600"
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        viewport={{ once: true }}
+      <div
+        className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 transform transition-all duration-1000 delay-700 ${
+          isVisible ? "scale-x-100" : "scale-x-0"
+        }`}
         style={{ transformOrigin: "left" }}
       />
+
+      <style jsx>{`
+        @keyframes fade-in-left {
+          from {
+            opacity: 0;
+            transform: translateX(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes scale-in {
+          from {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .animate-fade-in-left {
+          animation: fade-in-left 0.5s ease-out forwards;
+        }
+
+        .animate-scale-in {
+          animation: scale-in 0.4s ease-out forwards;
+        }
+
+        .animation-delay-200 {
+          animation-delay: 200ms;
+        }
+        .animation-delay-300 {
+          animation-delay: 300ms;
+        }
+        .animation-delay-350 {
+          animation-delay: 350ms;
+        }
+        .animation-delay-400 {
+          animation-delay: 400ms;
+        }
+        .animation-delay-450 {
+          animation-delay: 450ms;
+        }
+        .animation-delay-500 {
+          animation-delay: 500ms;
+        }
+        .animation-delay-550 {
+          animation-delay: 550ms;
+        }
+        .animation-delay-600 {
+          animation-delay: 600ms;
+        }
+      `}</style>
     </footer>
   );
 }
