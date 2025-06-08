@@ -191,12 +191,12 @@ export default function Projects() {
               )}
 
               {/* Project Image/Icon */}
-              <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 h-56">
+              <div className="relative overflow-hidden bg-gradient-to-br from-gray-900/30 to-gray-800/30 backdrop-blur-3xl h-52">
                 {project.image ? (
                   <img
                     src={project.image}
                     alt={`${project.title} preview`}
-                    className="w-full h-full object-contain bg-gray-900 group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full rounded object-contain bg-gray-900/20 group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
                   <div className="flex items-center justify-center h-full">
