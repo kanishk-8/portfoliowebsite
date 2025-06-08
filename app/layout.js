@@ -12,16 +12,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Kanishk - Web & App Developer",
-  description: "Student and Full Stack Developer specializing in React, Next.js, React Native, Golang, Flask, and more. Explore my projects and skills.",
-  keywords: "Web Developer, App Developer, React, Next.js, React Native, Golang, Flask, Tailwind CSS",
+  title: "Kanishk - Full Stack Developer",
+  description:
+    "Student & Web/App Developer specializing in React, Next.js, React Native, Golang, Flask and more. Explore my projects and skills.",
+  keywords:
+    "web developer, app developer, react, nextjs, react native, golang, flask, tailwind, portfolio",
+  author: "Kanishk",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white`}
       >
         {children}
       </body>
