@@ -42,12 +42,6 @@ export default function Footer() {
       icon: "💼",
       href: "https://www.linkedin.com/in/kanishk-kumar-926426258",
     },
-    { name: "Twitter", icon: "🐦", href: "https://twitter.com/kanishk" },
-    {
-      name: "Instagram",
-      icon: "📷",
-      href: "https://instagram.com/kanishk._.2",
-    },
   ];
 
   const scrollToTop = () => {
@@ -153,46 +147,6 @@ export default function Footer() {
                   className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
                     isVisible
                       ? "animate-fade-in-left animation-delay-400"
-                      : "opacity-0 -translate-x-4"
-                  }`}
-                >
-                  <span>📧</span>
-                  <a
-                    href="mailto:kanishkkumar222004@gmail.com"
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
-                  >
-                    kanishkkumar222004@gmail.com
-                  </a>
-                </div>
-                <div
-                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
-                    isVisible
-                      ? "animate-fade-in-left animation-delay-450"
-                      : "opacity-0 -translate-x-4"
-                  }`}
-                >
-                  <span>📱</span>
-                  <a
-                    href="tel:+919871808842"
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
-                  >
-                    +91 9871808842
-                  </a>
-                </div>
-                <div
-                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
-                    isVisible
-                      ? "animate-fade-in-left animation-delay-500"
-                      : "opacity-0 -translate-x-4"
-                  }`}
-                >
-                  <span>📍</span>
-                  <span className="text-gray-400">Delhi, India</span>
-                </div>
-                <div
-                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
-                    isVisible
-                      ? "animate-fade-in-left animation-delay-550"
                       : "opacity-0 -translate-x-4"
                   }`}
                 >

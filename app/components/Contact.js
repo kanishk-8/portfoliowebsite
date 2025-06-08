@@ -178,16 +178,6 @@ export default function Contact() {
               <div className="flex space-x-4">
                 {[
                   {
-                    name: "GitHub",
-                    icon: "🐙",
-                    link: "https://github.com/kanishk-8",
-                  },
-                  {
-                    name: "LinkedIn",
-                    icon: "💼",
-                    link: "https://www.linkedin.com/in/kanishk-kumar-926426258",
-                  },
-                  {
                     name: "Twitter",
                     icon: "🐦",
                     link: "https://twitter.com/kanishk",
