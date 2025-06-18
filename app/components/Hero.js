@@ -1,12 +1,24 @@
 "use client";
 import { useState, useEffect } from "react";
 import { TypeAnimation } from "react-type-animation";
+import dynamic from "next/dynamic";
+
+// Dynamically import Lottie to avoid SSR issues
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
+  const [astronautAnimationData, setAstronautAnimationData] = useState(null);
 
   useEffect(() => {
     setMounted(true);
+    // Load the astronaut Lottie animation
+    fetch("/astani.json")
+      .then((response) => response.json())
+      .then((data) => setAstronautAnimationData(data))
+      .catch((error) =>
+        console.error("Error loading astronaut animation:", error)
+      );
   }, []);
 
   const scrollToSection = (href) => {
@@ -80,6 +92,24 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        {/* Flying Astronaut Lottie Animation */}
+        {mounted && astronautAnimationData && (
+          <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 z-20">
+            <div className="animate-fly-across">
+              <Lottie
+                animationData={astronautAnimationData}
+                loop={true}
+                autoplay={true}
+                style={{
+                  width: 150,
+                  height: 150,
+                  filter: "drop-shadow(0 0 20px rgba(99, 102, 241, 0.3))",
+                }}
+              />
+            </div>
+          </div>
+        )}
+
         <div
           className={`transform transition-all duration-1000 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -248,6 +278,28 @@ export default function Hero() {
         .animate-scroll-indicator {
           animation: scroll-indicator ease-in-out infinite;
           animation-duration: 2s;
+        }
+
+        @keyframes fly-across {
+          0% {
+            transform: translateX(-100vw) translateY(20px) rotate(-10deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(100vw) translateY(-20px) rotate(10deg);
+            opacity: 0;
+          }
+        }
+
+        .animate-fly-across {
+          animation: fly-across linear infinite;
+          animation-duration: 15s;
         }
       `}</style>
     </section>
