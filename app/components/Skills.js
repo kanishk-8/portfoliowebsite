@@ -30,34 +30,34 @@ export default function Skills() {
     {
       title: "Frontend",
       skills: [
-        { name: "React.js", level: 90, icon: "⚛️" },
-        { name: "Next.js", level: 85, icon: "▲" },
-        { name: "JavaScript", level: 88, icon: "📜" },
-        { name: "TypeScript", level: 80, icon: "📘" },
-        { name: "Tailwind CSS", level: 92, icon: "🎨" },
-        { name: "HTML/CSS", level: 95, icon: "🌐" },
+        { name: "React.js", icon: "⚛️" },
+        { name: "Next.js", icon: "▲" },
+        { name: "JavaScript", icon: "📜" },
+        { name: "TypeScript", icon: "📘" },
+        { name: "Tailwind CSS", icon: "🎨" },
+        { name: "HTML/CSS", icon: "🌐" },
       ],
     },
     {
       title: "Backend",
       skills: [
-        { name: "Node.js", level: 82, icon: "🟢" },
-        { name: "Golang", level: 75, icon: "🐹" },
-        { name: "Flask", level: 78, icon: "🐍" },
-        { name: "Express.js", level: 80, icon: "🚀" },
-        { name: "REST APIs", level: 85, icon: "🔌" },
-        { name: "GraphQL", level: 70, icon: "📊" },
+        { name: "Node.js", icon: "🟢" },
+        { name: "Golang", icon: "🐹" },
+        { name: "Flask", icon: "🐍" },
+        { name: "Express.js", icon: "🚀" },
+        { name: "REST APIs", icon: "🔌" },
+        { name: "GraphQL", icon: "📊" },
       ],
     },
     {
-      title: "Mobile & Others",
+      title: "Mobile & Tools",
       skills: [
-        { name: "React Native", level: 83, icon: "📱" },
-        { name: "MongoDB", level: 78, icon: "🍃" },
-        { name: "PostgreSQL", level: 75, icon: "🐘" },
-        { name: "Git", level: 88, icon: "📝" },
-        { name: "Docker", level: 70, icon: "🐳" },
-        { name: "AWS", level: 65, icon: "☁️" },
+        { name: "React Native", icon: "📱" },
+        { name: "MongoDB", icon: "🍃" },
+        { name: "PostgreSQL", icon: "🐘" },
+        { name: "Git", icon: "📝" },
+        { name: "Docker", icon: "🐳" },
+        { name: "Firebase", icon: "🔥" },
       ],
     },
   ];
@@ -84,94 +84,90 @@ export default function Skills() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <div
               key={category.title}
-              className={`bg-black rounded-xl p-6 border border-gray-800 hover:border-gray-600 transition-all duration-500 shadow-lg hover:shadow-2xl transform ${
+              className={`group relative overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 ${
                 isVisible
                   ? `animate-fade-in-up animation-delay-${
                       categoryIndex * 200 + 200
                     }`
-                  : "opacity-0 translate-y-8"
+                  : "opacity-0 translate-y-12"
               }`}
             >
-              <h3 className="text-xl font-bold text-center mb-6 text-white">
-                {category.title}
-              </h3>
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div
-                    key={skill.name}
-                    className={`transform transition-all duration-600 ${
-                      isVisible
-                        ? `animate-fade-in-left animation-delay-${
-                            categoryIndex * 200 + skillIndex * 100 + 400
-                          }`
-                        : "opacity-0 -translate-x-4"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-lg">{skill.icon}</span>
-                        <span className="text-gray-300 font-medium">
-                          {skill.name}
-                        </span>
+              {/* Gradient border effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+              <div className="absolute inset-[1px] bg-black rounded-2xl"></div>
+
+              {/* Content */}
+              <div className="relative p-8 h-full">
+                {/* Category header with gradient */}
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent mb-3 group-hover:from-blue-300 group-hover:to-purple-500 transition-all duration-300">
+                    {category.title}
+                  </h3>
+                  <div className="w-12 h-0.5 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto opacity-60"></div>
+                </div>
+
+                {/* Skills grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div
+                      key={skill.name}
+                      className={`group/skill relative overflow-hidden rounded-xl border border-gray-800 hover:border-blue-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 hover:-translate-y-1 ${
+                        isVisible
+                          ? `animate-fade-in-scale animation-delay-${
+                              categoryIndex * 200 + skillIndex * 100 + 400
+                            }`
+                          : "opacity-0 scale-95"
+                      }`}
+                    >
+                      {/* Subtle gradient background */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/50 to-gray-800/30 opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300"></div>
+
+                      <div className="relative flex items-center space-x-3 p-4">
+                        <div className="text-2xl transform group-hover/skill:scale-110 transition-transform duration-300 flex-shrink-0">
+                          {skill.icon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-gray-300 font-medium group-hover/skill:text-white transition-colors duration-300 text-sm sm:text-base">
+                            {skill.name}
+                          </span>
+                        </div>
+
+                        {/* Animated arrow on hover */}
+                        <div className="opacity-0 group-hover/skill:opacity-100 transform translate-x-2 group-hover/skill:translate-x-0 transition-all duration-300">
+                          <svg
+                            className="w-4 h-4 text-blue-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
                       </div>
-                      <span className="text-sm text-gray-400">
-                        {skill.level}%
-                      </span>
                     </div>
-                    <div className="w-full bg-gray-800 rounded-full h-2">
-                      <div
-                        className={`bg-gradient-to-r from-blue-400 to-purple-600 h-2 rounded-full transition-all duration-1000 ${
-                          isVisible ? "animate-width-expand" : "w-0"
-                        }`}
-                        style={{
-                          width: isVisible ? `${skill.level}%` : "0%",
-                          animationDelay: `${
-                            categoryIndex * 200 + skillIndex * 100 + 600
-                          }ms`,
-                        }}
-                      />
-                    </div>
+                  ))}
+                </div>
+
+                {/* Category decoration */}
+                <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+                  <div className="text-4xl">
+                    {category.title === "Frontend" && "🎨"}
+                    {category.title === "Backend" && "⚙️"}
+                    {category.title === "Mobile & Tools" && "🔧"}
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Additional Skills */}
-        <div
-          className={`mt-16 text-center transform transition-all duration-1000 delay-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <h3 className="text-xl font-bold mb-6 text-white">
-            Also Familiar With
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              "convex",
-              "Firebase",
-              "Vercel",
-              "Microsoft Azure",
-              "Render",
-              "Clerk",
-            ].map((tech, index) => (
-              <span
-                key={tech}
-                className={`bg-gray-800 text-gray-300 px-4 py-2 rounded-full text-sm border border-gray-700 hover:border-gray-500 hover:bg-gray-700 transition-all duration-300 transform ${
-                  isVisible
-                    ? `animate-scale-in animation-delay-${1200 + index * 100}`
-                    : "opacity-0 scale-0"
-                }`}
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -198,14 +194,14 @@ export default function Skills() {
           }
         }
 
-        @keyframes scale-in {
+        @keyframes fade-in-scale {
           from {
             opacity: 0;
-            transform: scale(0);
+            transform: scale(0.9) translateY(20px);
           }
           to {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
           }
         }
 
@@ -217,8 +213,8 @@ export default function Skills() {
           animation: fade-in-left 0.6s ease-out forwards;
         }
 
-        .animate-scale-in {
-          animation: scale-in 0.5s ease-out forwards;
+        .animate-fade-in-scale {
+          animation: fade-in-scale 0.5s ease-out forwards;
         }
 
         .animation-delay-200 {

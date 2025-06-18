@@ -142,27 +142,76 @@ export default function Projects() {
 
         {/* Filter Buttons */}
         <div
-          className={`flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 px-4 transform transition-all duration-1000 delay-200 ${
+          className={`mb-12 px-2 sm:px-4 transform transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {filters.map((filterItem, index) => (
-            <button
-              key={filterItem.value}
-              onClick={() => setFilter(filterItem.value)}
-              className={`px-3 sm:px-6 py-2 text-sm sm:text-base rounded-full font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 min-w-fit ${
-                filter === filterItem.value
-                  ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white border border-gray-700 hover:border-gray-600"
-              } ${
-                isVisible
-                  ? `animate-fade-in-up animation-delay-${index * 100 + 300}`
-                  : "opacity-0"
-              }`}
-            >
-              {filterItem.name}
-            </button>
-          ))}
+          {/* Mobile: Stack layout */}
+          <div className="flex flex-col space-y-3 sm:hidden">
+            <div className="flex justify-center gap-2">
+              {filters.slice(0, 2).map((filterItem, index) => (
+                <button
+                  key={filterItem.value}
+                  onClick={() => setFilter(filterItem.value)}
+                  className={`px-4 py-2.5 text-sm rounded-full font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 flex-1 min-w-[90px] ${
+                    filter === filterItem.value
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                      : "bg-black/40 backdrop-blur-sm text-gray-400 hover:bg-black/60 hover:text-white border border-blue-500/30 hover:border-blue-400/50"
+                  } ${
+                    isVisible
+                      ? `animate-fade-in-up animation-delay-${
+                          index * 100 + 300
+                        }`
+                      : "opacity-0"
+                  }`}
+                >
+                  {filterItem.name}
+                </button>
+              ))}
+            </div>
+            <div className="flex justify-center gap-2">
+              {filters.slice(2).map((filterItem, index) => (
+                <button
+                  key={filterItem.value}
+                  onClick={() => setFilter(filterItem.value)}
+                  className={`px-4 py-2.5 text-sm rounded-full font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 flex-1 min-w-[80px] ${
+                    filter === filterItem.value
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                      : "bg-black/40 backdrop-blur-sm text-gray-400 hover:bg-black/60 hover:text-white border border-blue-500/30 hover:border-blue-400/50"
+                  } ${
+                    isVisible
+                      ? `animate-fade-in-up animation-delay-${
+                          (index + 2) * 100 + 300
+                        }`
+                      : "opacity-0"
+                  }`}
+                >
+                  {filterItem.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Single row layout */}
+          <div className="hidden sm:flex flex-wrap justify-center gap-4">
+            {filters.map((filterItem, index) => (
+              <button
+                key={filterItem.value}
+                onClick={() => setFilter(filterItem.value)}
+                className={`px-6 py-2 text-base rounded-full font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 min-w-fit ${
+                  filter === filterItem.value
+                    ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg"
+                    : "bg-black/40 backdrop-blur-sm text-gray-400 hover:bg-black/60 hover:text-white border border-blue-500/30 hover:border-blue-400/50"
+                } ${
+                  isVisible
+                    ? `animate-fade-in-up animation-delay-${index * 100 + 300}`
+                    : "opacity-0"
+                }`}
+              >
+                {filterItem.name}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Projects Grid */}
@@ -170,7 +219,7 @@ export default function Projects() {
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
-              className={`bg-black rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-500 shadow-lg hover:shadow-2xl group hover:-translate-y-2 transform ${
+              className={`bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden border border-blue-500/20 hover:border-blue-400/40 transition-all duration-500 shadow-lg hover:shadow-blue-500/10 group hover:-translate-y-2 transform ${
                 project.featured ? "ring-2 ring-blue-500/30" : ""
               } ${
                 isVisible
@@ -216,10 +265,10 @@ export default function Projects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-gray-800/90 backdrop-blur-sm text-white p-3 rounded-full hover:bg-gray-700 transition-all duration-200 transform hover:scale-110 active:scale-95 border border-gray-600"
+                      className="relative bg-black/70 backdrop-blur-sm text-white p-4 rounded-full hover:bg-black/90 transition-all duration-200 transform hover:scale-110 active:scale-95 border border-blue-500/30 group/btn overflow-hidden"
                     >
                       <svg
-                        className="w-5 h-5"
+                        className="w-5 h-5 transition-transform duration-200 group-hover/btn:scale-110"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -229,16 +278,9 @@ export default function Projects() {
                           clipRule="evenodd"
                         />
                       </svg>
-                    </a>
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-blue-600/90 backdrop-blur-sm text-white p-3 rounded-full hover:bg-blue-700 transition-all duration-200 transform hover:scale-110 active:scale-95 border border-blue-400"
-                      >
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200 rounded-full">
                         <svg
-                          className="w-5 h-5"
+                          className="w-4 h-4 text-blue-400"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -250,6 +292,43 @@ export default function Projects() {
                             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                           />
                         </svg>
+                      </div>
+                    </a>
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative bg-blue-600/90 backdrop-blur-sm text-white p-4 rounded-full hover:bg-blue-700 transition-all duration-200 transform hover:scale-110 active:scale-95 border border-blue-400 group/btn overflow-hidden"
+                      >
+                        <svg
+                          className="w-5 h-5 transition-transform duration-200 group-hover/btn:scale-110"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center bg-blue-800/80 backdrop-blur-sm opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200 rounded-full">
+                          <svg
+                            className="w-4 h-4 text-blue-200"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                        </div>
                       </a>
                     )}
                   </div>
@@ -270,7 +349,7 @@ export default function Projects() {
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-gray-800 text-gray-300 text-xs px-3 py-1 rounded-full border border-gray-700 hover:border-gray-600 transition-colors duration-200"
+                      className="bg-black/50 text-gray-300 text-xs px-3 py-1 rounded-full border border-blue-500/20 hover:border-blue-400/30 transition-colors duration-200"
                     >
                       {tech}
                     </span>
@@ -283,10 +362,10 @@ export default function Projects() {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 border border-gray-700 hover:border-gray-600 active:scale-95"
+                    className="flex-1 bg-black/50 hover:bg-black/70 backdrop-blur-sm text-blue-300 hover:text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 border border-blue-500/30 hover:border-blue-400/50 active:scale-95 group/mobile"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="w-4 h-4 group-hover/mobile:scale-110 transition-transform duration-200"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -303,10 +382,10 @@ export default function Projects() {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 active:scale-95"
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-2 active:scale-95 group/mobile"
                     >
                       <svg
-                        className="w-4 h-4"
+                        className="w-4 h-4 group-hover/mobile:scale-110 transition-transform duration-200"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

@@ -97,7 +97,7 @@ export default function About() {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-6 mt-8">
               <div
-                className={`text-center p-4 bg-black rounded-lg border border-gray-800 transform transition-all duration-800 delay-500 ${
+                className={`text-center p-4 bg-black/40 backdrop-blur-sm border border-blue-500/20 rounded-lg transform transition-all duration-800 delay-500 ${
                   isVisible
                     ? "opacity-100 translate-y-0 scale-100"
                     : "opacity-0 translate-y-4 scale-95"
@@ -107,7 +107,7 @@ export default function About() {
                 <p className="text-gray-300">Years Experience</p>
               </div>
               <div
-                className={`text-center p-4 bg-black rounded-lg border border-gray-800 transform transition-all duration-800 delay-600 ${
+                className={`text-center p-4 bg-black/40 backdrop-blur-sm border border-blue-500/20 rounded-lg transform transition-all duration-800 delay-600 ${
                   isVisible
                     ? "opacity-100 translate-y-0 scale-100"
                     : "opacity-0 translate-y-4 scale-95"
@@ -120,7 +120,7 @@ export default function About() {
 
             {/* Download CV Button */}
             <div
-              className={`mt-8 transform transition-all duration-800 delay-700 ${
+              className={`mt-8 text-center transform transition-all duration-800 delay-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"

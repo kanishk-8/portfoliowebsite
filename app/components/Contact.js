@@ -147,7 +147,7 @@ export default function Contact() {
                   rel={
                     method.link.startsWith("http") ? "noopener noreferrer" : ""
                   }
-                  className={`flex items-center space-x-4 p-4 bg-black rounded-lg border border-gray-800 hover:border-gray-600 hover:bg-gray-900 transition-all duration-500 group transform ${
+                  className={`flex items-center space-x-4 p-4 bg-black/40 backdrop-blur-sm rounded-lg border border-blue-500/20 hover:border-blue-400/40 hover:bg-black/60 transition-all duration-500 group transform shadow-lg hover:shadow-blue-500/10 ${
                     isVisible
                       ? `animate-fade-in-up animation-delay-${
                           300 + index * 100
@@ -211,7 +211,7 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200"
+                    className="w-full px-4 py-3 bg-black/50 backdrop-blur-sm border border-blue-500/30 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200"
                     placeholder="Your Name"
                   />
                 </div>
@@ -225,7 +225,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200"
+                    className="w-full px-4 py-3 bg-black/50 backdrop-blur-sm border border-blue-500/30 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -241,7 +241,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200"
+                  className="w-full px-4 py-3 bg-black/50 backdrop-blur-sm border border-blue-500/30 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200"
                   placeholder="What's this about?"
                 />
               </div>
@@ -256,7 +256,7 @@ export default function Contact() {
                   onChange={handleInputChange}
                   required
                   rows="6"
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 bg-black/50 backdrop-blur-sm border border-blue-500/30 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white placeholder-gray-400 transition-all duration-200 resize-none"
                   placeholder="Tell me about your project or just say hello..."
                 ></textarea>
               </div>
@@ -266,7 +266,7 @@ export default function Contact() {
                 disabled={isSubmitting}
                 className={`w-full py-3 px-6 rounded-lg font-bold transition-all duration-300 transform ${
                   isSubmitting
-                    ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                    ? "bg-black/30 text-gray-500 cursor-not-allowed border border-gray-600"
                     : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
                 }`}
               >
