@@ -203,8 +203,7 @@ export default function Footer() {
           }`}
         >
           <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {currentYear} Kanishk. All rights reserved. Built with ❤️ using
-            Next.js & Tailwind CSS
+            Portfolio by Kanishk - Built with ❤️ using Next.js & Tailwind CSS
           </div>
 
           {/* Back to Top Button */}

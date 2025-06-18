@@ -135,23 +135,6 @@ export default function Skills() {
                             {skill.name}
                           </span>
                         </div>
-
-                        {/* Animated arrow on hover */}
-                        <div className="opacity-0 group-hover/skill:opacity-100 transform translate-x-2 group-hover/skill:translate-x-0 transition-all duration-300">
-                          <svg
-                            className="w-4 h-4 text-blue-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </div>
                       </div>
                     </div>
                   ))}
