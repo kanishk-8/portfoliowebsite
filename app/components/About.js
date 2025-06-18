@@ -53,12 +53,15 @@ export default function About() {
                 : "opacity-0 -translate-x-8"
             }`}
           >
-            <div className="relative w-80 h-80 mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full animate-pulse"></div>
-              <div className="absolute inset-2 bg-black rounded-full flex items-center justify-center border border-gray-800">
-                <div className="w-64 h-64 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-6xl font-bold text-white">
-                  K
-                </div>
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto">
+              {/* Gradient border effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 rounded-full animate-pulse"></div>
+              <div className="absolute inset-1 bg-black rounded-full flex items-center justify-center">
+                <img
+                  src="/profilephoto.png"
+                  alt="Kanishk Kumar"
+                  className="w-[95%] h-[95%] rounded-full object-contain "
+                />
               </div>
             </div>
           </div>
