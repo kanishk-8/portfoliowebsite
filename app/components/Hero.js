@@ -9,9 +9,19 @@ const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const [astronautAnimationData, setAstronautAnimationData] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     // Load the astronaut Lottie animation
     fetch("/astani.json")
       .then((response) => response.json())
@@ -19,6 +29,8 @@ export default function Hero() {
       .catch((error) =>
         console.error("Error loading astronaut animation:", error)
       );
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const scrollToSection = (href) => {
@@ -91,25 +103,33 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-        {/* Flying Astronaut Lottie Animation */}
-        {mounted && astronautAnimationData && (
-          <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="animate-fly-across">
-              <Lottie
-                animationData={astronautAnimationData}
-                loop={true}
-                autoplay={true}
-                style={{
-                  width: 150,
-                  height: 150,
-                  filter: "drop-shadow(0 0 20px rgba(99, 102, 241, 0.3))",
-                }}
-              />
-            </div>
+      {/* Wandering Astronaut Lottie Animation */}
+      {mounted && astronautAnimationData && (
+        <div className="absolute inset-0 pointer-events-none z-20">
+          <div
+            className={
+              isMobile
+                ? "animate-wander-space-mobile"
+                : "animate-wander-space-desktop"
+            }
+          >
+            <Lottie
+              animationData={astronautAnimationData}
+              loop={true}
+              autoplay={true}
+              style={{
+                width: isMobile ? 70 : 120,
+                height: isMobile ? 70 : 120,
+                filter: `drop-shadow(0 0 ${
+                  isMobile ? 8 : 15
+                }px rgba(99, 102, 241, 0.4))`,
+              }}
+            />
           </div>
-        )}
+        </div>
+      )}
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
         <div
           className={`transform transition-all duration-1000 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -175,7 +195,7 @@ export default function Hero() {
             </button>
             <button
               onClick={() => scrollToSection("#contact")}
-              className="border-2 border-gray-400 hover:border-white text-gray-400 hover:text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
+              className="bg-black/30 hover:bg-black/50 backdrop-blur-md text-gray-300 hover:text-white font-bold py-3 px-8 rounded-full transition-all duration-300 ring-2 ring-blue-500/30 hover:ring-blue-500/60 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
             >
               Get In Touch
             </button>
@@ -257,6 +277,62 @@ export default function Hero() {
           }
         }
 
+        /* Desktop wandering animation */
+        @keyframes wander-space-desktop {
+          0% {
+            transform: translateX(15vw) translateY(25vh) rotate(0deg);
+          }
+          10% {
+            transform: translateX(30vw) translateY(20vh) rotate(15deg);
+          }
+          25% {
+            transform: translateX(65vw) translateY(35vh) rotate(-10deg);
+          }
+          40% {
+            transform: translateX(70vw) translateY(60vh) rotate(20deg);
+          }
+          55% {
+            transform: translateX(50vw) translateY(65vh) rotate(-15deg);
+          }
+          70% {
+            transform: translateX(25vw) translateY(60vh) rotate(10deg);
+          }
+          85% {
+            transform: translateX(20vw) translateY(40vh) rotate(-5deg);
+          }
+          100% {
+            transform: translateX(15vw) translateY(25vh) rotate(0deg);
+          }
+        }
+
+        /* Mobile wandering animation - avoids center text area */
+        @keyframes wander-space-mobile {
+          0% {
+            transform: translateX(5vw) translateY(15vh) rotate(0deg);
+          }
+          15% {
+            transform: translateX(80vw) translateY(20vh) rotate(10deg);
+          }
+          30% {
+            transform: translateX(85vw) translateY(35vh) rotate(-8deg);
+          }
+          45% {
+            transform: translateX(75vw) translateY(80vh) rotate(12deg);
+          }
+          60% {
+            transform: translateX(20vw) translateY(85vh) rotate(-10deg);
+          }
+          75% {
+            transform: translateX(10vw) translateY(75vh) rotate(8deg);
+          }
+          90% {
+            transform: translateX(5vw) translateY(40vh) rotate(-5deg);
+          }
+          100% {
+            transform: translateX(5vw) translateY(15vh) rotate(0deg);
+          }
+        }
+
         .animate-float-up {
           animation: float-up linear infinite;
         }
@@ -280,26 +356,14 @@ export default function Hero() {
           animation-duration: 2s;
         }
 
-        @keyframes fly-across {
-          0% {
-            transform: translateX(-100vw) translateY(20px) rotate(-10deg);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(100vw) translateY(-20px) rotate(10deg);
-            opacity: 0;
-          }
+        .animate-wander-space-desktop {
+          animation: wander-space-desktop ease-in-out infinite;
+          animation-duration: 25s;
         }
 
-        .animate-fly-across {
-          animation: fly-across linear infinite;
-          animation-duration: 15s;
+        .animate-wander-space-mobile {
+          animation: wander-space-mobile ease-in-out infinite;
+          animation-duration: 20s;
         }
       `}</style>
     </section>
