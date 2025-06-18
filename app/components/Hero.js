@@ -136,7 +136,7 @@ export default function Hero() {
           }`}
         >
           <h1
-            className={`text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white transform transition-all duration-1000 delay-200 ${
+            className={`text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-white transform transition-all duration-1000 delay-200 ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -147,7 +147,7 @@ export default function Hero() {
           </h1>
 
           <div
-            className={`text-xl sm:text-2xl lg:text-3xl text-gray-300 mb-8 h-16 transform transition-all duration-1000 delay-400 ${
+            className={`text-3xl lg:text-4xl text-gray-300 mb-8 h-16 transform transition-all duration-1000 delay-400 ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -173,7 +173,7 @@ export default function Hero() {
           </div>
 
           <p
-            className={`text-lg sm:text-xl text-gray-400 mb-10 max-w-3xl mx-auto transform transition-all duration-1000 delay-600 ${
+            className={`text-sm mx-3 sm:text-xl text-gray-400 mb-10 max-w-3xl  transform transition-all duration-1000 delay-600 ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
