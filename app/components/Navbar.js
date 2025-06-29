@@ -56,7 +56,7 @@ export default function Navbar() {
         mounted ? "animate-slide-down" : "translate-y-[-100px]"
       } ${
         scrolled
-          ? "bg-black/80 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+          ? "bg-black/30 backdrop-blur-xl border-gray-700/50 shadow-2xl"
           : "bg-transparent border-transparent"
       }`}
     >
