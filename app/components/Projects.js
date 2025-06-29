@@ -33,7 +33,7 @@ export default function Projects() {
       title: "ProCode - Online Coding Assessment Platform",
       description:
         "A comprehensive coding assessment platform designed for teachers and students. Features include blogs, admin management, virtual classrooms, proctored coding tests, and real-time status tracking.",
-      technologies: ["Next.js", "Node.js", "MongoDB", "Authentication"],
+      technologies: ["Next.js", "Node.js", "Mysql", "Golang"],
       category: "fullstack",
       github: "https://github.com/kanishk-8/procode",
       live: "https://procode-alpha.vercel.app/",
@@ -57,7 +57,7 @@ export default function Projects() {
       title: "RailMadad - AI Railway Complaint System",
       description:
         "An AI-powered railway complaint management system with full-stack architecture. Features intelligent complaint categorization, real-time tracking, and automated responses for efficient railway customer service.",
-      technologies: ["Next.js", "Flask", "AI/ML", "Python"],
+      technologies: ["Next.js", "Flask", "AI/ML", "Gemini"],
       category: "fullstack",
       github: "https://github.com/kanishk-8/sih_railmadad",
       live: null,
