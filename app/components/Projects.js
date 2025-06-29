@@ -30,18 +30,6 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: "Weeblook - Manga Reader Platform",
-      description:
-        "A modern manga reader platform with dynamic theming built on Next.js. Integrates with MangaDex API to provide seamless manga reading experience with responsive design and real-time data fetching.",
-      technologies: ["Next.js", "MangaDex API", "Tailwind CSS", "React"],
-      category: "frontend",
-      github: "https://github.com/kanishk-8/weeblook",
-      live: "https://weeblook.vercel.app/popularmanga",
-      image: "/weeblook.png", // Upload the Weeblook screenshot here
-      featured: true,
-    },
-    {
-      id: 2,
       title: "ProCode - Online Coding Assessment Platform",
       description:
         "A comprehensive coding assessment platform designed for teachers and students. Features include blogs, admin management, virtual classrooms, proctored coding tests, and real-time status tracking.",
@@ -53,7 +41,7 @@ export default function Projects() {
       featured: true,
     },
     {
-      id: 3,
+      id: 2,
       title: "Cloud Teacher - AI Teaching Platform",
       description:
         "An innovative cloud-based teaching platform that handles PDF uploads and provides AI-generated notes, quizzes, and doubt-solving functionality. Built with Streamlit for seamless deployment.",
@@ -65,7 +53,7 @@ export default function Projects() {
       featured: false,
     },
     {
-      id: 4,
+      id: 3,
       title: "RailMadad - AI Railway Complaint System",
       description:
         "An AI-powered railway complaint management system with full-stack architecture. Features intelligent complaint categorization, real-time tracking, and automated responses for efficient railway customer service.",
@@ -74,6 +62,18 @@ export default function Projects() {
       github: "https://github.com/kanishk-8/sih_railmadad",
       live: null,
       image: "/railmadad.png",
+      featured: true,
+    },
+    {
+      id: 4,
+      title: "Weeblook - Manga Reader Platform",
+      description:
+        "A modern manga reader platform with dynamic theming built on Next.js. Integrates with MangaDex API to provide seamless manga reading experience with responsive design and real-time data fetching.",
+      technologies: ["Next.js", "MangaDex API", "Tailwind CSS", "React"],
+      category: "frontend",
+      github: "https://github.com/kanishk-8/weeblook",
+      live: "https://weeblook.vercel.app/popularmanga",
+      image: "/weeblook.png", // Upload the Weeblook screenshot here
       featured: true,
     },
     {
