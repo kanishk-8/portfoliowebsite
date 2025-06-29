@@ -46,7 +46,7 @@ export default function Skills() {
         { name: "Flask", icon: "🐍" },
         { name: "Appwrite", icon: "🚀" },
         { name: "REST APIs", icon: "🔌" },
-        { name: "PHP", icon: "�" },
+        { name: "PHP", icon: "🐘" },
       ],
     },
     {
@@ -54,7 +54,7 @@ export default function Skills() {
       skills: [
         { name: "React Native", icon: "📱" },
         { name: "Mysql", icon: "🗄️" },
-        { name: "Podman", icon: "�" },
+        { name: "Podman", icon: "⚙️" },
         { name: "Git", icon: "📝" },
         { name: "Docker", icon: "🐳" },
         { name: "Firebase", icon: "🔥" },
