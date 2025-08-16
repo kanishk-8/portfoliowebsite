@@ -13,7 +13,7 @@ export default function Projects() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1, rootMargin: "-100px" }
+      { threshold: 0.1, rootMargin: "-100px" },
     );
 
     if (ref.current) {
@@ -74,7 +74,7 @@ export default function Projects() {
       github: "https://github.com/kanishk-8/weeblook",
       live: "https://weeblook.vercel.app/popularmanga",
       image: "/weeblook.png", // Upload the Weeblook screenshot here
-      featured: true,
+      featured: false,
     },
     {
       id: 5,
@@ -83,10 +83,10 @@ export default function Projects() {
         "An eco-friendly Android app connecting environmentally conscious people. Features achievement tracking, environmental contribution monitoring, and social networking for sustainability enthusiasts.",
       technologies: ["React Native", "Android", "Firebase", "Social Media"],
       category: "mobile",
-      github: "https://github.com/kanishk-8/Eco-circle",
+      github: "https://github.com/kanishk-8/EcoCircle",
       live: null,
-      image: "/ecocircle.png",
-      featured: false,
+      image: "/ecoCircle.png",
+      featured: true,
     },
     {
       id: 6,
@@ -114,8 +114,8 @@ export default function Projects() {
     filter === "all"
       ? projects
       : filter === "featured"
-      ? projects.filter((project) => project.featured)
-      : projects.filter((project) => project.category === filter);
+        ? projects.filter((project) => project.featured)
+        : projects.filter((project) => project.category === filter);
 
   return (
     <section id="projects" className="py-20 bg-black">
