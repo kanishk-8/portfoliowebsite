@@ -81,7 +81,7 @@ export default function Projects() {
       title: "EcoCircle - Environmental Social Network",
       description:
         "An eco-friendly Android app connecting environmentally conscious people. Features achievement tracking, environmental contribution monitoring, and social networking for sustainability enthusiasts.",
-      technologies: ["React Native", "Android", "Firebase", "Social Media"],
+      technologies: ["React Native", "Android", "Supabase", "Social Media"],
       category: "mobile",
       github: "https://github.com/kanishk-8/EcoCircle",
       live: null,
