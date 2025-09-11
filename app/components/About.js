@@ -12,7 +12,7 @@ export default function About() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1, rootMargin: "-100px" }
+      { threshold: 0.1, rootMargin: "-100px" },
     );
 
     if (ref.current) {
@@ -58,7 +58,7 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 rounded-full animate-pulse"></div>
               <div className="absolute inset-1 bg-black rounded-full flex items-center justify-center">
                 <img
-                  src="/profilephoto.png"
+                  src="/profile.png"
                   alt="Kanishk Kumar"
                   className="w-[95%] h-[95%] rounded-full object-contain "
                 />
