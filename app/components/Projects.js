@@ -62,7 +62,7 @@ export default function Projects() {
       github: "https://github.com/kanishk-8/sih_railmadad",
       live: null,
       image: "/railmadad.png",
-      featured: true,
+      featured: false,
     },
     {
       id: 4,
@@ -85,7 +85,7 @@ export default function Projects() {
       category: "mobile",
       github: "https://github.com/kanishk-8/EcoCircle",
       live: null,
-      image: "/ecoCircle.png",
+      image: "/ecocircle.png",
       featured: true,
     },
     {
@@ -99,6 +99,24 @@ export default function Projects() {
       live: null,
       image: "/noti.png",
       featured: false,
+    },
+    {
+      id: 7,
+      title: "Omunotes - AI-Powered Notes App",
+      description:
+        "A cross-platform mobile notes app leveraging Google's Gemini AI for smart note generation. Features include multi-modal input (text, image, PDF), PDF export, sharing, a Markdown-based renderer, and offline persistence with SQLite.",
+      technologies: [
+        "React Native",
+        "Expo",
+        "Gemini AI",
+        "SQLite",
+        "PDF Export",
+      ],
+      category: "mobile",
+      github: "https://github.com/kanishk-8/Omunotes",
+      live: "https://github.com/kanishk-8/Omunotes/releases/tag/1.1", // App Release link
+      image: "/omunotes.png", // Upload your Omunotes screenshot here
+      featured: true,
     },
   ];
 
