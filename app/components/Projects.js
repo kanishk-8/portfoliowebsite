@@ -118,6 +118,26 @@ export default function Projects() {
       image: "/omunotes.png", // Upload your Omunotes screenshot here
       featured: true,
     },
+    {
+      id: 8,
+      title: "Voice Bot - Conversational AI Chatbot",
+      description:
+        "A full-stack AI chatbot with real-time voice input and animated feedback, built using FastAPI (Python) backend and React (Vite) frontend. Features include speech-to-text (Whisper ASR), LLM-based responses (LangGraph), text-to-speech (Murf), user authentication, personalized personas, session memory, and Supabase integration.",
+      technologies: [
+        "FastAPI",
+        "React",
+        "Vite",
+        "Groq Whisper",
+        "Murf TTS",
+        "LangGraph",
+        "Supabase",
+      ],
+      category: "fullstack",
+      github: "https://github.com/kanishk-8/Voice_Bot",
+      live: "https://voice-bot-lilac.vercel.app/",
+      image: "/voicebot.png", // Add screenshot for Voice Bot
+      featured: false,
+    },
   ];
 
   const filters = [
