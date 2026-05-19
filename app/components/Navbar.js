@@ -49,14 +49,17 @@ export default function Navbar() {
       return;
     }
 
-    if (href === "#home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    // Delay scroll until the mobile menu exit animation (~300ms) completes
+    setTimeout(() => {
+      if (href === "#home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 350);
   };
 
   return (
@@ -91,7 +94,13 @@ export default function Navbar() {
               />
             </div>
             <div className="flex flex-col">
-              <h1 className="text-xl font-black text-white uppercase tracking-widest">
+              <h1
+                className="text-xl font-black uppercase tracking-widest transition-all duration-300"
+                style={{
+                  color: "transparent",
+                  WebkitTextStroke: scrolled ? "1px #f7f7f5" : "1px #111111",
+                }}
+              >
                 Kanishk
               </h1>
             </div>
@@ -129,7 +138,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="relative w-10 h-10 rounded-full border border-[#f7f7f5] flex items-center justify-center text-[#f7f7f5] focus:outline-none"
+              className={`relative w-10 h-10 rounded-full border flex items-center justify-center focus:outline-none transition-colors duration-300 ${scrolled ? "border-[#f7f7f5] text-[#f7f7f5]" : "border-[#111111] text-[#111111]"}`}
             >
               <div className="w-4 h-4 flex flex-col justify-center space-y-1">
                 <span className={`w-full h-[2px] bg-current transition-transform duration-300 ${isOpen ? "rotate-45 translate-y-[6px]" : ""}`} />

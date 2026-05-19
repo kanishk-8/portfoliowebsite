@@ -21,7 +21,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-[#f7f7f5] text-[#111111] overflow-x-hidden selection:bg-black selection:text-white">
+    <div className="min-h-screen bg-[#f7f7f5] text-[#111111] selection:bg-black selection:text-white">
       <Preloader onComplete={() => setLoadingComplete(true)} />
       
       <div style={{ opacity: loadingComplete ? 1 : 0, transition: 'opacity 0.8s ease-in-out' }}>
