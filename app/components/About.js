@@ -1,145 +1,118 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function About() {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1, rootMargin: "-100px" },
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
-
   return (
-    <section id="about" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          ref={ref}
-          className={`text-center mb-16 transform transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+    <section id="about" className="py-24 bg-[#050505] relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-[#050505] to-[#050505] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
-            About{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-              Me
-            </span>
+            About <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Me</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto"></div>
-        </div>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Profile Image */}
-          <div
-            className={`relative transform transition-all duration-1000 delay-200 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-8"
-            }`}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+            className="relative"
           >
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto">
-              {/* Gradient border effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 rounded-full animate-pulse"></div>
-              <div className="absolute inset-1 bg-black rounded-full flex items-center justify-center">
-                <img
-                  src="/profile.png"
-                  alt="Kanishk Kumar"
-                  className="w-[95%] h-[95%] rounded-full object-contain "
-                />
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full blur-[30px] opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 rounded-full p-1">
+                <div className="w-full h-full bg-[#050505] rounded-full flex items-center justify-center overflow-hidden">
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                    src="/profile.png"
+                    alt="Kanishk Kumar"
+                    className="w-[95%] h-[95%] rounded-full object-contain"
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* About Content */}
-          <div
-            className={`transform transition-all duration-1000 delay-300 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-8"
-            }`}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-6 text-white">
+            <h3 className="text-2xl font-bold mb-6 text-white bg-gradient-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">
               Passionate Student & Developer
             </h3>
-            <div className="space-y-4 text-gray-300 text-lg">
+            <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
               <p>
-                I'm a dedicated student with a passion for web and mobile
-                application development. My journey in programming started with
-                curiosity and has evolved into a deep love for creating
-                innovative solutions.
+                I'm a dedicated student with a passion for web and mobile application development. My journey in programming started with curiosity and has evolved into a deep love for creating innovative solutions.
               </p>
               <p>
-                I specialize in modern technologies like React, Next.js, and
-                React Native for frontend development, while also working with
-                backend technologies like Golang and Flask to build full-stack
-                applications.
+                I specialize in modern technologies like React, Next.js, and React Native for frontend development, while also working with backend technologies like Golang, Rust, and FastAPI to build full-stack applications.
               </p>
               <p>
-                When I'm not coding, you'll find me exploring new technologies,
-                contributing to open source projects, or learning about the
-                latest trends in software development.
+                When I'm not coding, you'll find me exploring new technologies, contributing to open source projects, or learning about the latest trends in software development.
               </p>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-6 mt-8">
-              <div
-                className={`text-center p-4 bg-black/40 backdrop-blur-sm border border-blue-500/20 rounded-lg transform transition-all duration-800 delay-500 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0 scale-100"
-                    : "opacity-0 translate-y-4 scale-95"
-                }`}
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="text-center p-6 bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-blue-500/30 transition-colors"
               >
-                <h4 className="text-3xl font-bold text-blue-400">2+</h4>
-                <p className="text-gray-300">Years Experience</p>
-              </div>
-              <div
-                className={`text-center p-4 bg-black/40 backdrop-blur-sm border border-blue-500/20 rounded-lg transform transition-all duration-800 delay-600 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0 scale-100"
-                    : "opacity-0 translate-y-4 scale-95"
-                }`}
+                <h4 className="text-4xl font-black bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">3+</h4>
+                <p className="text-gray-400 text-sm mt-2 font-medium">Years Experience</p>
+              </motion.div>
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="text-center p-6 bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl hover:border-purple-500/30 transition-colors"
               >
-                <h4 className="text-3xl font-bold text-purple-400">15+</h4>
-                <p className="text-gray-300">Projects Completed</p>
-              </div>
+                <h4 className="text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">15+</h4>
+                <p className="text-gray-400 text-sm mt-2 font-medium">Projects Completed</p>
+              </motion.div>
             </div>
 
             {/* Download CV Button */}
-            <div
-              className={`mt-8 text-center transform transition-all duration-800 delay-700 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4"
-              }`}
-            >
-              <a
+            <div className="mt-8">
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href="/resume.pdf"
                 download="Kanishk_Kumar_Resume.pdf"
-                className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center space-x-2 bg-white text-black font-bold py-3 px-8 rounded-full shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all"
               >
-                Download CV
-              </a>
+                <span>Download CV</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
+      
+      <style jsx>{`
+        .animate-spin-slow {
+          animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </section>
   );
 }

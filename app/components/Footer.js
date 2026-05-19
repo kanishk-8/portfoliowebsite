@@ -1,31 +1,8 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Footer() {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
   const currentYear = new Date().getFullYear();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1, rootMargin: "-50px" }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, []);
 
   const quickLinks = [
     { name: "Home", href: "#home" },
@@ -86,213 +63,121 @@ export default function Footer() {
   };
 
   return (
-    <footer ref={ref} className="bg-black border-t border-gray-800 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-[#050505] border-t border-white/5 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8">
+          
           {/* Brand Section */}
-          <div className="col-span-1 md:col-span-2">
-            <div
-              className={`transform transition-all duration-1000 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent mb-4">
-                Kanishk
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
-                Passionate student and full-stack developer creating innovative
-                solutions with modern technologies. Always learning, always
-                building.
-              </p>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-10 h-10 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center text-lg hover:bg-black/60 transition-all duration-200 border border-blue-500/30 hover:border-blue-400/50 transform hover:scale-110 active:scale-95 ${
-                      isVisible
-                        ? `animate-scale-in animation-delay-${
-                            200 + index * 100
-                          }`
-                        : "opacity-0 scale-0"
-                    }`}
-                  >
-                    {social.icon}
-                  </a>
-                ))}
-              </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="col-span-1 md:col-span-2"
+          >
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4 inline-block">
+              Kanishk
+            </h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
+              Passionate student and full-stack developer creating innovative solutions with modern technologies. Always learning, always building.
+            </p>
+            <div className="flex space-x-3">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.name}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/5 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/10 transition-colors border border-white/10 hover:border-blue-500/50"
+                  aria-label={social.name}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <div
-              className={`transform transition-all duration-1000 delay-200 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
-              <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2">
-                {quickLinks.map((link, index) => (
-                  <li
-                    key={link.name}
-                    className={`transform transition-all duration-500 ${
-                      isVisible
-                        ? `animate-fade-in-left animation-delay-${
-                            300 + index * 50
-                          }`
-                        : "opacity-0 -translate-x-4"
-                    }`}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <h4 className="text-white font-semibold mb-6">Quick Links</h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-gray-400 hover:text-white text-sm transition-colors hover:translate-x-1 duration-200 transform inline-block"
                   >
-                    <button
-                      onClick={() => scrollToSection(link.href)}
-                      className="text-gray-400 hover:text-white text-sm transition-all duration-200 hover:translate-x-1 transform inline-block"
-                    >
-                      {link.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+                    {link.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
-            <div
-              className={`transform transition-all duration-1000 delay-300 ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
-            >
-              <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
-              <div className="space-y-3">
-                <div
-                  className={`flex items-center space-x-2 text-sm transform transition-all duration-500 ${
-                    isVisible
-                      ? "animate-fade-in-left animation-delay-400"
-                      : "opacity-0 -translate-x-4"
-                  }`}
-                >
-                  <svg
-                    className="w-4 h-4 text-blue-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                  </svg>
-                  <span className="text-gray-400">
-                    Available for opportunities
-                  </span>
-                </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <h4 className="text-white font-semibold mb-6">Get in Touch</h4>
+            <div className="flex items-center space-x-3 text-sm">
+              <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               </div>
+              <a href="mailto:kanishkkumar222004@gmail.com" className="text-gray-400 hover:text-white transition-colors">
+                Available for work
+              </a>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Section */}
-        <div
-          className={`border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center transform transition-all duration-1000 delay-600 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
         >
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            Portfolio by Kanishk - Built with ❤️ using Next.js & Tailwind CSS
+          <div className="text-gray-500 text-sm mb-4 md:mb-0">
+            &copy; {currentYear} Portfolio by Kanishk
           </div>
 
-          {/* Back to Top Button */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={scrollToTop}
-            className="flex items-center space-x-2 text-gray-400 hover:text-white text-sm transition-all duration-200 bg-black/40 hover:bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full border border-blue-500/30 hover:border-blue-400/50 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg"
+            className="flex items-center space-x-2 text-gray-400 hover:text-white text-sm bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full border border-white/10 transition-colors"
           >
             <span>Back to Top</span>
-            <svg
-              className="w-4 h-4 transform hover:-translate-y-1 transition-transform duration-200"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 10l7-7m0 0l7 7m-7-7v18"
-              />
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
 
-      {/* Decorative Elements */}
-      <div
-        className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 transform transition-all duration-1000 delay-700 ${
-          isVisible ? "scale-x-100" : "scale-x-0"
-        }`}
+      {/* Decorative Gradient Bar */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500"
         style={{ transformOrigin: "left" }}
       />
-
-      <style jsx>{`
-        @keyframes fade-in-left {
-          from {
-            opacity: 0;
-            transform: translateX(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes scale-in {
-          from {
-            opacity: 0;
-            transform: scale(0.8);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        .animate-fade-in-left {
-          animation: fade-in-left 0.5s ease-out forwards;
-        }
-
-        .animate-scale-in {
-          animation: scale-in 0.4s ease-out forwards;
-        }
-
-        .animation-delay-200 {
-          animation-delay: 200ms;
-        }
-        .animation-delay-300 {
-          animation-delay: 300ms;
-        }
-        .animation-delay-350 {
-          animation-delay: 350ms;
-        }
-        .animation-delay-400 {
-          animation-delay: 400ms;
-        }
-        .animation-delay-450 {
-          animation-delay: 450ms;
-        }
-        .animation-delay-500 {
-          animation-delay: 500ms;
-        }
-        .animation-delay-550 {
-          animation-delay: 550ms;
-        }
-        .animation-delay-600 {
-          animation-delay: 600ms;
-        }
-      `}</style>
     </footer>
   );
 }
