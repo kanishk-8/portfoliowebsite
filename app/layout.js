@@ -22,10 +22,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark bg-black">
+    <html lang="en" className="bg-[#f7f7f5]">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f7f7f5] text-[#111111]`}
       >
+        <div className="noise-overlay"></div>
         {children}
       </body>
     </html>

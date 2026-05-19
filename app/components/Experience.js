@@ -4,117 +4,103 @@ import { motion } from "framer-motion";
 export default function Experience() {
   const experiences = [
     {
-      company: "MakeHeadshot",
+      id: 2,
+      role: "Full Stack Development Intern",
+      company: "Aveoearth Impact Private Limited",
+      period: "Jan 2026 — May 2026",
+      location: "IPU-IIF (Onsite)",
+      points: [
+        "Solved infrastructure fragmentation for early-stage founders by building full-stack features for Aveostack (startup SaaS) and Aveoearth (sustainable multi-vendor marketplace) using Next.js, React, FastAPI, and Tailwind CSS.",
+        "Enabled secure transactions across 3 user roles (customer, vendor, admin) by integrating PhonePe S2S webhook payments and Firebase Auth JWT with role-based access control.",
+        "Empowered vendors to independently manage their storefronts by building dashboards, product management UI, and cart & checkout flows backed by a hybrid PostgreSQL/NeonDB and Firestore stack."
+      ],
+      technologies: ["Next.js", "FastAPI", "PostgreSQL", "Firebase"],
+    },
+    {
+      id: 1,
       role: "Software Development Intern",
-      date: "Jun 2025 - Sep 2025",
+      company: "MakeHeadshot",
+      period: "Jun 2025 — Sep 2025",
       location: "Remote",
-      color: "from-blue-500 to-cyan-400",
-      image: "/makeheadshot.png",
       points: [
         "Eliminated the need for expensive photography sessions by shipping Next.js + Tailwind CSS features for an AI-driven SaaS that auto-generates professional headshots.",
         "Connected frontend workflows to AI processing pipelines by integrating REST APIs with backend developers, enabling end-to-end headshot generation.",
-        "Improved user retention by optimizing frontend performance via code splitting and asset optimization, reducing page load times by 30%.",
+        "Improved user retention by optimizing frontend performance via code splitting and asset optimization, reducing page load times by 30%."
       ],
-    },
-    {
-      company: "Aveoearth Impact",
-      role: "Full Stack Development Intern",
-      date: "Jan 2026 - May 2026",
-      location: "IPU-IIF (Onsite)",
-      color: "from-purple-500 to-pink-500",
-      image: "/aveoearth.png",
-      points: [
-        "Solved infrastructure fragmentation for early-stage founders by building full-stack features for Aveostack and Aveoearth using Next.js, React, FastAPI, and Tailwind CSS.",
-        "Enabled secure transactions across 3 user roles (customer, vendor, admin) by integrating PhonePe S2S webhook payments and Firebase Auth JWT.",
-        "Empowered vendors to independently manage storefronts by building dashboards and cart flows backed by PostgreSQL/NeonDB and Firestore.",
-      ],
-    },
+      technologies: ["Next.js", "Tailwind CSS", "REST APIs"],
+    }
   ];
 
   return (
-    <section id="experience" className="py-24 bg-[#050505] relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-40 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+    <section id="experience" className="py-24 sm:py-32 bg-[#f7f7f5] text-[#111111] relative border-t border-gray-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="flex flex-col items-center mb-16 sm:mb-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter uppercase text-center"
+          >
+            Experience
+          </motion.h2>
+        </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-3xl sm:text-5xl font-black mb-4 text-white">
-            Professional <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Experience</span>
-          </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="border-t border-[#111]">
           {experiences.map((exp, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
+              key={exp.id}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: index * 0.2, type: "spring", stiffness: 100 }}
-              className="group relative"
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              className="group border-b border-[#111] py-12 grid grid-cols-1 md:grid-cols-12 gap-8 hover:bg-gray-200/50 transition-colors duration-500 cursor-default px-4"
             >
-              {/* Premium Glow Effect */}
-              <div className={`absolute -inset-0.5 bg-gradient-to-br ${exp.color} rounded-[2rem] blur opacity-20 group-hover:opacity-60 transition duration-500 group-hover:duration-200`}></div>
-              
-              <div className="relative h-full bg-[#0a0a0a] border border-white/10 rounded-[2rem] p-8 sm:p-10 hover:border-white/20 transition-all duration-300">
-                
-                {/* Header Section */}
-                <div className="flex flex-col space-y-4 mb-8">
-                  <div className="flex justify-between items-start gap-4">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
-                      {exp.role}
-                    </h3>
-                    <div className="hidden sm:block text-right">
-                      <span className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-300 font-medium whitespace-nowrap">
-                        {exp.date}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-lg p-[2px]`}>
-                      <div className="w-full h-full bg-[#0a0a0a] rounded-full flex items-center justify-center overflow-hidden">
-                         <img src={exp.image} alt={exp.company} className="w-full h-full object-cover bg-white/5" />
-                      </div>
-                    </div>
-                    <div>
-                      <div className={`text-lg font-bold bg-gradient-to-r ${exp.color} bg-clip-text text-transparent`}>
-                        {exp.company}
-                      </div>
-                      <div className="text-gray-500 text-sm">{exp.location}</div>
-                    </div>
-                  </div>
-                  
-                  {/* Mobile Date */}
-                  <div className="sm:hidden mt-2">
-                    <span className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-300 font-medium">
-                      {exp.date}
-                    </span>
-                  </div>
-                </div>
+              {/* Period / Year */}
+              <div className="md:col-span-3 flex flex-col items-start gap-2">
+                <span className="text-xl sm:text-2xl font-bold tracking-widest uppercase text-gray-400 group-hover:text-[#111] transition-colors duration-300">
+                  {exp.period}
+                </span>
+                <span className="text-xs font-bold tracking-widest uppercase text-gray-500">
+                  {exp.location}
+                </span>
+              </div>
 
-                {/* Points */}
-                <ul className="space-y-4">
+              {/* Role & Company */}
+              <div className="md:col-span-9 flex flex-col">
+                <div className="flex flex-col sm:flex-row sm:items-baseline flex-wrap gap-2 sm:gap-4 mb-6">
+                  <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter uppercase text-[#111]">
+                    {exp.role}
+                  </h3>
+                  <span className="text-lg sm:text-xl font-medium italic text-gray-500 whitespace-nowrap">
+                    @ {exp.company}
+                  </span>
+                </div>
+                
+                <ul className="space-y-4 mb-8">
                   {exp.points.map((point, i) => (
-                    <li key={i} className="text-gray-300 text-sm sm:text-base leading-relaxed flex items-start group/item">
-                      <span className={`mr-3 mt-1.5 w-2 h-2 rounded-full bg-gradient-to-br ${exp.color} flex-shrink-0 shadow-lg group-hover/item:scale-150 transition-transform duration-300`}></span>
-                      <span className="group-hover/item:text-white transition-colors duration-300">{point}</span>
+                    <li key={i} className="text-gray-600 text-base sm:text-lg leading-relaxed relative pl-6">
+                      <span className="absolute left-0 top-3 w-1.5 h-1.5 bg-[#111] rounded-full opacity-50"></span>
+                      {point}
                     </li>
                   ))}
                 </ul>
 
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {exp.technologies.map((tech) => (
+                    <span 
+                      key={tech} 
+                      className="text-xs sm:text-sm font-bold tracking-widest uppercase text-[#111] border border-[#111] rounded-full px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-[#111] hover:text-[#f7f7f5] transition-colors duration-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

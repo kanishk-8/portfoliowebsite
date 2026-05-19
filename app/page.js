@@ -8,9 +8,11 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Preloader from "./components/Preloader";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
+  const [loadingComplete, setLoadingComplete] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -19,17 +21,21 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-blue-500/30">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
+    <div className="min-h-screen bg-[#f7f7f5] text-[#111111] overflow-x-hidden selection:bg-black selection:text-white">
+      <Preloader onComplete={() => setLoadingComplete(true)} />
+      
+      <div style={{ opacity: loadingComplete ? 1 : 0, transition: 'opacity 0.8s ease-in-out' }}>
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Experience />
+          <Skills />
+          <Projects />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
