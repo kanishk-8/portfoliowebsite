@@ -48,7 +48,7 @@ export default function Projects() {
       github: "https://github.com/kanishk-8/Voice_Bot",
       live: "https://voice-bot-lilac.vercel.app/",
       image: "/voicebot.png",
-      featured: true,
+      featured: false,
     },
     {
       id: "omunotes",
